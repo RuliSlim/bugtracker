@@ -26,14 +26,17 @@ function register(req, res, next) {
 }
 
 function getAll(req, res, next) {
-    userService.getAll()
+    userService.admin()
         .then(users => res.json(users))
         .catch(err => next(err))
 }
 
+//TODO: confused about this, using req.user.sub also didnt work. while using passport js it works, req.user._id give me user id
 function getCurrent(req, res, next) {
-    userService.getById(req.user.sub)
-        .then(user => user ? res.json(user) : res.sendStatus(404))
+    userService.getById(req.user._id)
+        .then(user => {user ? res.json(user) : res.sendStatus(404)
+            //just making sure the url works
+            console.log('testtes'+user)}) 
         .catch(err => next(err))
 }
 

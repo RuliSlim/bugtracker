@@ -13,7 +13,8 @@ const ticketApi = require('./tickets/ticket.controller')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
-app.use(jwt())
+//TODO: Temporary for accessing server
+// app.use(jwt())
 
 // api routes
 app.use('/users', userApi)

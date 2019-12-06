@@ -12,7 +12,8 @@ module.exports = {
     getById,
     create,
     update,
-    delete: _delete
+    delete: _delete,
+    admin: admin
 }
 
 async function authenticate({ username, password }) {
@@ -74,4 +75,14 @@ async function update(id, userParam) {
 
 async function _delete(id) {
     await User.findByIdAndRemove(id)
+}
+
+//function admin
+async function admin(id) {
+    let checkRole = await User.findById(id).select('-hash')
+    if ( checkRole.role === admin) {
+        getAll()
+    } else {
+        throw 'You are not an admin'
+    }
 }
